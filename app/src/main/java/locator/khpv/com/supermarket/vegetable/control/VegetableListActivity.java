@@ -37,8 +37,8 @@ public class VegetableListActivity extends Activity {
     Firebase myFirebaseRef;
     @Bind(R.id.lvContent)
     ListView lvContent;
-    List<String> keyHeaderList;
-    Map<String, List<Vegetable>> stringListMap;
+//    List<String> keyHeaderList;
+//    Map<String, List<Vegetable>> stringListMap;
     List<Vegetable> vegetableList;
 
 
@@ -49,8 +49,8 @@ public class VegetableListActivity extends Activity {
         Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://giaptuyenk.firebaseio.com");
         ButterKnife.bind(this);
-        keyHeaderList = new ArrayList<>();
-        stringListMap = new HashMap<>();
+//        keyHeaderList = new ArrayList<>();
+//        stringListMap = new HashMap<>();
         vegetableList = new ArrayList<>();
 
         myFirebaseRef.child("vegetableList").addValueEventListener(new ValueEventListener() {
@@ -61,10 +61,10 @@ public class VegetableListActivity extends Activity {
                     //read menu list
                     final Vegetable vegetable = snapshot.getValue(Vegetable.class);
                     String name = vegetable.getDisplayName();
-                    keyHeaderList.add(name);
-                    if (stringListMap.get(name) == null)
-                        stringListMap.put(name, new ArrayList<Vegetable>());
-                    stringListMap.get(name).add(vegetable);
+//                    keyHeaderList.add(name);
+//                    if (stringListMap.get(name) == null)
+//                        stringListMap.put(name, new ArrayList<Vegetable>());
+//                    stringListMap.get(name).add(vegetable);
                     vegetableList.add(vegetable);
                     //cach che bien mon an
                     myFirebaseRef.child("/vegetableList/" + snapshot.getKey() + "/menu").addChildEventListener(new ChildEventListener() {
