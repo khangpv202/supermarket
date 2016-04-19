@@ -1,19 +1,16 @@
-package locator.khpv.com.supermarket.showdata;
+package locator.khpv.com.supermarket.vegetable.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.firebase.client.ValueEventListener;
-
 import java.util.List;
 import java.util.Map;
 
 import locator.khpv.com.supermarket.R;
-import locator.khpv.com.supermarket.showdata.model.Vegetable;
+import locator.khpv.com.supermarket.vegetable.model.Vegetable;
 
 /**
  * Created by Administrator on 4/15/2016.

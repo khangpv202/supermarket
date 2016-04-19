@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Supermarket</string>
+    <string name="app_name">GiapTuyen</string>
     
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

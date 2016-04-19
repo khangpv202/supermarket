@@ -1,8 +1,8 @@
-package locator.khpv.com.supermarket.showdata.model;
+package locator.khpv.com.supermarket.vegetable.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ public class Vegetable {
     String cost;
     String displayName;
     @JsonIgnore
-    List<Menu> menu;
+    List<Menu> menu = new ArrayList<>();
 
     public Vegetable() {
     }

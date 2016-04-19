@@ -14,7 +14,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import locator.khpv.com.supermarket.R;
-import locator.khpv.com.supermarket.showdata.ShowCompany;
+import locator.khpv.com.supermarket.vegetable.control.VegetableListActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -191,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onAuthenticated(AuthData authData) {
                     System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
-                    Intent intent = new Intent(LoginActivity.this, ShowCompany.class);
+                    Intent intent = new Intent(LoginActivity.this, VegetableListActivity.class);
                     startActivity(intent);
                     showProgress(false);
                 }

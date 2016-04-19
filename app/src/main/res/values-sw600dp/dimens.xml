@@ -1,0 +1,99 @@
+<resources>
+
+    <!--
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw600dp devices (e.getSalesJournalDTO. 7" tablets) here.
+    -->
+    <dimen name="inventory_add_unit_height">500dp</dimen>
+    <dimen name="avatar_sliding_menu_left">55dp</dimen>
+    <dimen name="authen_register_entry_text_size">3dp</dimen>
+    <dimen name="authen_register_entry_arrow_size">2dp</dimen>
+    <dimen name="company_item_size">18dp</dimen>
+    <dimen name="width_imageAvatar">110dp</dimen>
+    <dimen name="height_imageAvatar">110dp</dimen>
+    <dimen name="company_item_height">120dp</dimen>
+    <dimen name="height_item_po_unit_item">165dp</dimen>
+    <dimen name="part_log_detail_item_quantity_width">90dp</dimen>
+    <dimen name="part_log_realCost_margin_right">300dp</dimen>
+    <dimen name="part_log_detail_quantity_margin_left">150dp</dimen>
+    <dimen name="title_margin_top">5dp</dimen>
+    <dimen name="part_suggest_select_make_icon">50dp</dimen>
+    <dimen name="part_suggest_order_height">50dp</dimen>
+    <dimen name="unit_detail_work_order_width_outSiteServiceDocumentNumber">200dp</dimen>
+    <dimen name="unit_detail_work_order_width_outSiteServicePrice">70dp</dimen>
+    <dimen name="margin_bottom_floatBottom">80dp</dimen>
+    <dimen name="part_order_detail_slidingMenuRight">180dp</dimen>
+    <dimen name="part_update_excel_item_height">160dp</dimen>
+
+    <dimen name="app_item_size">130dp</dimen>
+    <dimen name="height_top_bar">65dp</dimen>
+    <dimen name="height_block_header">40dp</dimen>
+    <dimen name="height_block_header_order_unit_detail">60dp</dimen>
+    <dimen name="margin_left_button_on_top_bar">15dp</dimen>
+    <dimen name="margin_right_button_on_top_bar">10dp</dimen>
+    <dimen name="margin_right_btTextView_on_top_bar">15dp</dimen>
+    <dimen name="width_of_quantity_typeSearch">45dp</dimen>
+    <dimen name="auth_etHeight">60dp</dimen>
+    <dimen name="add_new_po_etHeight">80dp</dimen>
+    <dimen name="width_of_spinner">170dp</dimen>
+    <dimen name="height_of_item_part">140dp</dimen>
+    <dimen name="width_of_btSwipe">120dp</dimen>
+    <dimen name="height_of_item_search_part">110dp</dimen>
+    <dimen name="height_of_tabHost">55dp</dimen>
+    <dimen name="vertical_margin">15dp</dimen>
+    <dimen name="width_of_sliding_menu">350dp</dimen>
+    <dimen name="width_of_title_screen">440dp</dimen>
+    <dimen name="staff_actionbar_height">65dp</dimen>
+    <dimen name="height_of_item_remind_log">150dp</dimen>
+    <dimen name="padding_item_remind_log">20dp</dimen>
+    <dimen name="length_for_news">300dp</dimen>
+    <dimen name="height_of_block_add_order">180dp</dimen>
+    <dimen name="height_item_order_part">100dp</dimen>
+    <dimen name="sale_analysis_button_period">42dp</dimen>
+    <dimen name="sale_analysis_height_layout_period">59dp</dimen>
+    <dimen name="sale_analysis_text_size_x_axis">16dp</dimen>
+    <dimen name="sale_analysis_height_marker_view">55dp</dimen>
+    <dimen name="manage_model_spec_height_item">65dp</dimen>
+    <dimen name="tab_height">50dp</dimen>
+    <dimen name="large_margin_size">15dp</dimen>
+    <dimen name="small_margin_size">10dp</dimen>
+    <dimen name="height_item_sale_part">120dp</dimen>
+    <dimen name="part_order_line_item_x">200dp</dimen>
+    <dimen name="part_order_line_item_equal">130dp</dimen>
+    <dimen name="layout_listview_height">400dp</dimen>
+    <dimen name="margin_right_floatButton">60dp</dimen>
+    <dimen name="cornerRadius">10dp</dimen>
+    <dimen name="margin_left">5dp</dimen>
+    <dimen name="define_cycle_count_width_textView">130dp</dimen>
+    <dimen name="define_cycle_count_width_editText">160dp</dimen>
+    <dimen name="define_cycle_count_width_tvCharacter">35dp</dimen>
+    <dimen name="width_of_pie_chart">650dp</dimen>
+    <dimen name="height_of_pie_chart">350dp</dimen>
+    <dimen name="count_down_size">100dp</dimen>
+    <dimen name="min_height_labor_item">80dp</dimen>
+
+    <dimen name="height_check_out_top_bar">80dp</dimen>
+    <dimen name="height_sliding_menu_top">95dp</dimen>
+    <dimen name="auth_etWidth">457dp</dimen>
+    <dimen name="width_alert_dialog">450dp</dimen>
+    <dimen name="max_width_make_model_info">400dp</dimen>
+    <dimen name="S2">25dp</dimen>
+    <dimen name="S1">28dp</dimen>
+    <dimen name="S5">20dp</dimen>
+    <dimen name="S4">24dp</dimen>
+    <dimen name="S3">24dp</dimen>
+    <dimen name="S6">18dp</dimen>
+    <dimen name="S7">16dp</dimen>
+    <dimen name="S8">14dp</dimen>
+    <dimen name="S9">27dp</dimen>
+    <dimen name="S10">22dp</dimen>
+    <dimen name="S11">30dp</dimen>
+    <dimen name="S12">10dp</dimen>
+    <dimen name="MH1">35dp</dimen>
+    <dimen name="MH2">22dp</dimen>
+    <dimen name="MH3">15dp</dimen>
+    <dimen name="MH4">8dp</dimen>
+    <dimen name="V2">50dp</dimen>
+    <dimen name="maintenance_plan_item_height">110dp</dimen>
+    <dimen name="V3">75dp</dimen>
+</resources>
