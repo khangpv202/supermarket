@@ -1,5 +1,7 @@
 /build
+.idea.*
 .idea/libraries
 .idea/tasks.xml
 .idea/vcs.xml
+/app.iml
 .idea/workspace.xml
