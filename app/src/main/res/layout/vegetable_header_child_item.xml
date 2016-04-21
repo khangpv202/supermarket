@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:id="@+id/tvNameOfVegetable"
-    android:text="bla 1"
-    android:layout_width="match_parent"
-    android:background="@color/purpose_green"
-    android:textSize="@dimen/MH1"
-    android:gravity="center"
-    android:textColor="@color/blue_line"
-    android:layout_height="@dimen/auth_etHeight" />
-   <LinearLayout
-       android:layout_below="@+id/tvNameOfVegetable"
-       android:orientation="horizontal"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-       <ImageView
-           android:id="@+id/ivAvatar"
-           android:layout_width="150dp"
-           android:layout_height="150dp" />
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-           <TextView
-               android:id="@+id/tvCost"
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/auth_etHeight"
-               />
-           <TextView
-               android:id="@+id/tvCalo"
-               android:layout_below="@+id/tvCost"
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/auth_etHeight"
-               />
-           <TextView
-               android:id="@+id/tvNameOfMenu"
-               android:layout_below="@+id/tvCalo"
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/auth_etHeight"
-               />
-       </RelativeLayout>
-   </LinearLayout>
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_marginTop="@dimen/unit_detail_padding_item"
+            android:layout_width="@dimen/width_imageAvatar"
+            android:layout_height="@dimen/height_imageAvatar"
+            android:scaleType="fitXY"
+            android:background="@color/gray"/>
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivAvatar">
+        <TextView
+                android:id="@+id/tvNameOfVegetable"
+                android:text="bla 1"
+                android:textStyle="bold"
+                android:textSize="@dimen/S2"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:layout_below="@+id/tvNameOfVegetable"
+                android:id="@+id/tvCost"
+                android:textColor="@color/bg_blue_login"
+                android:textSize="@dimen/S4"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:id="@+id/tvCalo"
+                android:layout_below="@+id/tvCost"
+                android:textSize="@dimen/S4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:id="@+id/tvNameOfMenu"
+                android:layout_below="@+id/tvCalo"
+                android:textSize="@dimen/S4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>
