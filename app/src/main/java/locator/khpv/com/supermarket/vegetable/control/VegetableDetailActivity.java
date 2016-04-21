@@ -36,7 +36,6 @@ public class VegetableDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vegetable_detail_activity);
-        Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://giaptuyenk.firebaseio.com");
         ButterKnife.bind(this);
         Vegetable vegetable = (Vegetable) TransferObjectHolder.getInstance().getTransferData();

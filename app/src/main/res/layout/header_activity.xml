@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/auth_etHeight">
+<TextView
+        android:id="@+id/tvCancel"
+        android:gravity="center"
+        android:text="Cancel"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content" android:layout_height="match_parent"/>
+    <TextView
+            android:id="@+id/tvTitle"
+            android:gravity="center"
+            android:text="Them Rau"
+            android:layout_toRightOf="@+id/tvCancel"
+            android:layout_toLeftOf="@+id/tvFinish"
+            android:layout_width="wrap_content" android:layout_height="match_parent"/>
+    <TextView
+            android:id="@+id/tvFinish"
+            android:text="Xong"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content" android:layout_height="match_parent"/>
+</RelativeLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+<include
+        android:id="@+id/header"
+        layout="@layout/header_activity"/>
+    <TextView
+            android:layout_below="@+id/header"
+            android:id="@+id/tvNameFirstField"
+            android:text="ten rau: "
+            android:gravity="center"
+            android:layout_alignTop="@+id/etNameOfVegetable"
+            android:layout_alignBottom="@+id/etNameOfVegetable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <EditText
+            android:layout_below="@+id/header"
+            android:background="@null"
+            android:id="@+id/etNameOfVegetable"
+            android:layout_width="match_parent" android:layout_height="@dimen/edittext_Height"
+            android:layout_toRightOf="@+id/tvNameFirstField"
+            android:hint="nhap ten rau"/>
+    <TextView
+            android:id="@+id/tvPriceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignTop="@+id/etPrice"
+            android:layout_alignBottom="@+id/etPrice"
+            android:text="Gia rau: "/>
+    <EditText
+            android:id="@+id/etPrice"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_Height"
+            android:layout_toRightOf="@+id/tvPriceTitle"
+            android:layout_below="@+id/etNameOfVegetable"
+            android:hint="Nhap gia tien"/>
+    <TextView
+            android:id="@+id/tvCaloTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignTop="@+id/etCalo"
+            android:layout_alignBottom="@+id/etCalo"
+            android:text="Nang luong: "/>
+    <EditText
+            android:id="@+id/etCalo"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_Height"
+            android:layout_toRightOf="@+id/tvCaloTitle"
+            android:layout_below="@+id/etPrice"
+            android:hint="so kcal/1g"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/etPrice"
+              android:gravity="center"
+              android:layout_alignTop="@+id/tvChooseMenu"
+              android:layout_alignBottom="@+id/tvChooseMenu"
+              android:id="@+id/tvNameMenu"
+              android:text="Mon an: "/>
+    <TextView
+            android:id="@+id/tvChooseMenu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_Height"
+              android:layout_below="@+id/etCalo"
+              android:layout_toRightOf="@+id/tvNameMenu"
+              android:gravity="center"
+              android:text="Chon mon an"/>
+    <ScrollView
+            android:layout_below="@+id/tvChooseMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:id="@+id/llNameOfMenuList"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </ScrollView>
+</RelativeLayout>

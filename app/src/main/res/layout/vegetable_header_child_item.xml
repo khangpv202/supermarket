@@ -8,6 +8,8 @@
             android:layout_marginTop="@dimen/unit_detail_padding_item"
             android:layout_width="@dimen/width_imageAvatar"
             android:layout_height="@dimen/height_imageAvatar"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:scaleType="fitXY"
             android:background="@color/gray"/>
     <RelativeLayout android:layout_width="wrap_content"
@@ -16,15 +18,16 @@
         <TextView
                 android:id="@+id/tvNameOfVegetable"
                 android:text="bla 1"
+                android:singleLine="true"
                 android:textStyle="bold"
                 android:textSize="@dimen/S2"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
-                android:gravity="center"
                 android:layout_height="wrap_content"/>
         <TextView
                 android:layout_below="@+id/tvNameOfVegetable"
                 android:id="@+id/tvCost"
+                android:singleLine="true"
                 android:textColor="@color/bg_blue_login"
                 android:textSize="@dimen/S4"
                 android:textStyle="bold"
@@ -32,6 +35,7 @@
                 android:layout_height="wrap_content"/>
         <TextView
                 android:id="@+id/tvCalo"
+                android:singleLine="true"
                 android:layout_below="@+id/tvCost"
                 android:textSize="@dimen/S4"
                 android:layout_width="match_parent"
@@ -39,6 +43,7 @@
         <TextView
                 android:id="@+id/tvNameOfMenu"
                 android:layout_below="@+id/tvCalo"
+                android:singleLine="true"
                 android:textSize="@dimen/S4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

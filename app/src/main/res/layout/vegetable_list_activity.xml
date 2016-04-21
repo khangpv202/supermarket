@@ -33,7 +33,7 @@
                                                           android:layout_width="wrap_content"
                                                           android:layout_height="wrap_content"
                                                           android:layout_centerInParent="true"
-                                                          android:text="@string/po.purchaseOrders"
+                                                          android:text="Danh sach rau"
                                                           style="@style/H3"/>
 
                                                 <LinearLayout
@@ -172,7 +172,7 @@
                 </LinearLayout>
         </android.support.v4.widget.DrawerLayout>
         <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/btAddSupplier"
+                android:id="@+id/btAddNewVegetable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/part_suggest_select_make_icon"

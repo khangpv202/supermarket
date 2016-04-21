@@ -183,6 +183,7 @@
     <!--style login-->
     <dimen name="mg_left_right_top_login">16dp</dimen>
     <!--<dimen name="auth_etWidth">257dp</dimen>-->
+    <dimen name="edittext_Height">39.67dp</dimen>
     <dimen name="auth_etHeight">49.67dp</dimen>
     <dimen name="manage_model_spec_height_item">50dp</dimen>
     <dimen name="part_order_log_item_height_item">78dp</dimen>

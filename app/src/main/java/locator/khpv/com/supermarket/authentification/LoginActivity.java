@@ -67,7 +67,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://giaptuyenk.firebaseio.com/");
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
