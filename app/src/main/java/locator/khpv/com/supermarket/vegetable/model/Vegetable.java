@@ -12,6 +12,7 @@ public class Vegetable {
     String calo;
     String cost;
     String displayName;
+    String displayMenu;
     @JsonIgnore
     List<Menu> menu = new ArrayList<>();
 
@@ -48,5 +49,15 @@ public class Vegetable {
 
     public void setMenu(List<Menu> menu) {
         this.menu = menu;
+    }
+
+    public String getDisplayMenu()
+    {
+        return displayMenu;
+    }
+
+    public void setDisplayMenu(String displayMenu)
+    {
+        this.displayMenu = displayMenu;
     }
 }

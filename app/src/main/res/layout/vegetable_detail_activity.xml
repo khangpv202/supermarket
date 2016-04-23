@@ -1,64 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scWholeContent"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
-
+              android:id="@+id/scWholeContent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+    <include
+            android:id="@+id/header"
+            layout="@layout/header_activity"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/margin_text"
-            android:textColor="@color/gray_1"
-            android:text="Ten: " />
-
-        <TextView
-            android:id="@+id/nameOfVegetable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/margin_text"
-            android:textColor="@color/black"
-            android:text="rau cai cuc" />
-    </LinearLayout>
+            android:layout_height="@dimen/auth_etHeight"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal">
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/H3"
+                android:textSize="@dimen/S2"
+                android:textColor="@color/gray_1"
+                android:text="Ten: "/>
+
+        <TextView
+                android:id="@+id/nameOfVegetable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/S2"
+                android:textColor="@color/black"
+                android:text="rau cai cuc"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="2dp"
+          android:background="@color/line1"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/margin_text"
-            android:textColor="@color/gray_1"
-            android:text="gia: " />
-
-        <TextView
-            android:id="@+id/tvPrice"
-            style="@style/T29"
-            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/margin_text"
-            android:textColor="@color/black"
-            android:text="5000d" />
-    </LinearLayout>
+            android:layout_height="@dimen/auth_etHeight">
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/H3"
+                android:textSize="@dimen/S2"
+                android:textColor="@color/gray_1"
+                android:text="Gia: "/>
+
+        <TextView
+                android:id="@+id/tvPrice"
+                style="@style/T29"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/S2"
+                android:text="5000d"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="2dp"
+          android:background="@color/line1"/>
     <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp">
+            android:id="@+id/scrollView"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/llWholeMenu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+                android:id="@+id/llWholeMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"/>
     </ScrollView>
 </LinearLayout>

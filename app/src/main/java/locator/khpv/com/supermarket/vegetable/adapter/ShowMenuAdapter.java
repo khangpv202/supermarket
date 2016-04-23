@@ -46,6 +46,7 @@ public class ShowMenuAdapter extends ArrayAdapter<Vegetable>
         viewHolder.tvCalo.setText(vegetable.getCalo());
         setMenuView(viewHolder, vegetable);
         viewHolder.tvNameOfVegetable.setText(vegetable.getDisplayName());
+        viewHolder.tvNameOfMenu.setText(vegetable.getDisplayMenu());
         setVisibleItem(viewHolder, vegetable);
 
         return convertView;

@@ -1,186 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
-        <android.support.v4.widget.DrawerLayout
-                android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_height="match_parent"
-                android:background="@color/white">
+                android:layout_width="match_parent">
+    <android.support.v4.widget.DrawerLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <!--header-->
+            <RelativeLayout
+                    android:id="@+id/rlHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_top_bar"
+                    android:background="@color/bg_blue_login">
+
+                <com.andexert.library.RippleView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/layoutShowSpinner"
+                        app:rv_rippleDuration="250"
+                        android:layout_centerInParent="true">
+
+                    <LinearLayout android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="vertical">
+
+                        <TextView android:id="@+id/order_list_tvTitle"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_centerInParent="true"
+                                  android:text="Danh sach rau"
+                                  style="@style/H3"/>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_horizontal">
+
+                            <TextView android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="All"
+                                      android:id="@+id/tvSpinner"
+                                      style="@style/T11"
+                                      android:layout_gravity="center_horizontal"/>
+
+                            <ImageView android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:src="@drawable/abc_spinner_mtrl_am_alpha"
+                                       android:layout_marginLeft="@dimen/small_margin_size"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.andexert.library.RippleView>
+
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_drawer"
+                        android:id="@+id/title_layout_btMenu"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"/>
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/title_layout_btMoreAction"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:background="@drawable/btn_more_action"
+                        android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+            //search text here
+            <RelativeLayout
+                    android:id="@+id/rlSearch"
+                    android:layout_below="@+id/rlHeader"
+                    android:background="@color/gray_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <RelativeLayout
+                        android:background="@color/transparent"
+                        android:id="@+id/sale_search_unit_history_rlContainer"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <!--header-->
-                        <RelativeLayout
-                                android:id="@+id/rlHeader"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/height_top_bar"
-                                android:background="@color/bg_blue_login">
-
-                                <com.andexert.library.RippleView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/layoutShowSpinner"
-                                        app:rv_rippleDuration="250"
-                                        android:layout_centerInParent="true">
-
-                                        <LinearLayout android:layout_width="wrap_content"
-                                                      android:layout_height="wrap_content"
-                                                      android:orientation="vertical">
-
-                                                <TextView android:id="@+id/order_list_tvTitle"
-                                                          android:layout_width="wrap_content"
-                                                          android:layout_height="wrap_content"
-                                                          android:layout_centerInParent="true"
-                                                          android:text="Danh sach rau"
-                                                          style="@style/H3"/>
-
-                                                <LinearLayout
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:gravity="center_horizontal">
-
-                                                        <TextView android:layout_width="wrap_content"
-                                                                  android:layout_height="wrap_content"
-                                                                  android:text="All"
-                                                                  android:id="@+id/tvSpinner"
-                                                                  style="@style/T11"
-                                                                  android:layout_gravity="center_horizontal"/>
-
-                                                        <ImageView android:layout_width="wrap_content"
-                                                                   android:layout_height="wrap_content"
-                                                                   android:src="@drawable/abc_spinner_mtrl_am_alpha"
-                                                                   android:layout_marginLeft="@dimen/small_margin_size"/>
-                                                </LinearLayout>
-
-                                        </LinearLayout>
-                                </com.andexert.library.RippleView>
-
-
-                                <Button
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/btn_drawer"
-                                        android:id="@+id/title_layout_btMenu"
-                                        android:layout_centerVertical="true"
-                                        android:clickable="true"/>
-
-                                <Button
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/title_layout_btMoreAction"
-                                        android:layout_centerVertical="true"
-                                        android:clickable="true"
-                                        android:background="@drawable/btn_more_action"
-                                        android:layout_alignParentRight="true"/>
-                        </RelativeLayout>
-                        //search text here
-                        <RelativeLayout
-                                android:id="@+id/rlSearch"
-                                android:layout_below="@+id/rlHeader"
-                                android:background="@color/gray_background"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <RelativeLayout
-                                        android:background="@color/transparent"
-                                        android:id="@+id/sale_search_unit_history_rlContainer"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/auth_etHeight"
-                                        android:layout_centerVertical="true">
-                                        <EditText
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:focusable="true"
-                                                android:focusableInTouchMode="true"
-                                                android:id="@+id/sale_search_unit_history_edtSearch"
-                                                android:layout_alignParentLeft="true"
-                                                android:layout_marginLeft="@dimen/vertical_margin"
-                                                android:paddingLeft="@dimen/normal_padding"
-                                                android:paddingRight="@dimen/V1"
-                                                android:drawablePadding="@dimen/normal_padding"
-                                                android:layout_marginRight="@dimen/normal_padding"
-                                                android:hint="Search"
-                                                android:textSize="@dimen/S5"
-                                                android:layout_toLeftOf="@+id/sale_search_unit_history_tvAdvance"
-                                                android:singleLine="true"
-                                                android:gravity="center|left"
-                                                android:drawableLeft="@drawable/icon_search"
-                                                android:background="@drawable/border_layout"
-                                                android:layout_centerVertical="true"
-                                                android:imeOptions="actionSearch"
-                                                />
-                                        <TextView
-                                                android:id="@+id/sale_search_unit_history_tvAdvance"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="match_parent"
-                                                android:paddingRight="@dimen/normal_padding"
-                                                android:layout_alignParentRight="true"
-                                                android:layout_centerVertical="true"
-                                                android:textSize="@dimen/S3"
-                                                android:gravity="center"
-                                                android:textColor="@color/Blue"
-                                                android:text="Cancel"
-                                                />
-                                        <ImageView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:id="@+id/sale_search_unit_history_ivClearSearch"
-                                                android:src="@drawable/icon_clear_search"
-                                                android:layout_centerVertical="true"
-                                                android:background="@color/white"
-                                                android:layout_marginRight="@dimen/vertical_margin"
-                                                android:layout_toLeftOf="@+id/sale_search_unit_history_tvAdvance"
-                                                />
-                                </RelativeLayout>
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="1dp"
-                                        android:layout_marginTop="@dimen/normal_padding"
-                                        android:background="#b9b9b9"
-                                        android:layout_below="@+id/sale_search_unit_history_rlContainer"/>
-                        </RelativeLayout>
-                        <ListView
-                                android:id="@+id/lvContent"
-                                android:layout_below="@+id/rlSearch"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
+                        android:layout_height="@dimen/auth_etHeight"
+                        android:layout_centerVertical="true">
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:id="@+id/sale_search_unit_history_edtSearch"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="@dimen/vertical_margin"
+                            android:paddingLeft="@dimen/normal_padding"
+                            android:paddingRight="@dimen/V1"
+                            android:drawablePadding="@dimen/normal_padding"
+                            android:layout_marginRight="@dimen/normal_padding"
+                            android:hint="Search"
+                            android:textSize="@dimen/S5"
+                            android:layout_toLeftOf="@+id/sale_search_unit_history_tvAdvance"
+                            android:singleLine="true"
+                            android:gravity="center|left"
+                            android:drawableLeft="@drawable/icon_search"
+                            android:background="@drawable/border_layout"
+                            android:layout_centerVertical="true"
+                            android:imeOptions="actionSearch"
+                            />
+                    <TextView
+                            android:id="@+id/sale_search_unit_history_tvAdvance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="@dimen/normal_padding"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/S3"
+                            android:gravity="center"
+                            android:textColor="@color/Blue"
+                            android:text="Cancel"
+                            />
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/sale_search_unit_history_ivClearSearch"
+                            android:src="@drawable/icon_clear_search"
+                            android:layout_centerVertical="true"
+                            android:background="@color/white"
+                            android:layout_marginRight="@dimen/vertical_margin"
+                            android:layout_toLeftOf="@+id/sale_search_unit_history_tvAdvance"
+                            />
                 </RelativeLayout>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/normal_padding"
+                        android:background="#b9b9b9"
+                        android:layout_below="@+id/sale_search_unit_history_rlContainer"/>
+            </RelativeLayout>
+            <ListView
+                    android:id="@+id/lvContent"
+                    android:layout_below="@+id/rlSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
-                <LinearLayout
-                        android:id="@+id/left_drawer"
-                        android:layout_width="240dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="start"
-                        android:background="@color/Blue"
-                        android:dividerHeight="0dp"
-                        android:orientation="vertical">
+            <com.melnykov.fab.FloatingActionButton
+                    android:id="@+id/btAddNewVegetable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/part_suggest_select_make_icon"
+                    android:layout_marginRight="@dimen/part_suggest_select_make_icon"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_add_news"
+                    app:fab_colorRipple="@color/accent_material_dark"
+                    app:fab_shadow="true"/>
 
-                        <TextView
-                                android:id="@+id/tvVergetable"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/auth_etHeight"
-                                android:text="Vergetable"/>
+        </RelativeLayout>
 
-                        <TextView
-                                android:id="@+id/tvMeat"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/auth_etHeight"
-                                android:text="Meat"/>
-                </LinearLayout>
-        </android.support.v4.widget.DrawerLayout>
-        <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/btAddNewVegetable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/part_suggest_select_make_icon"
-                android:layout_marginRight="@dimen/part_suggest_select_make_icon"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/icon_add_news"
-                app:fab_colorRipple="@color/accent_material_dark"
-                app:fab_shadow="true"/>
+        <LinearLayout
+                android:id="@+id/left_drawer"
+                android:layout_width="240dp"
+                android:clickable="true"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@color/whiteSmoke"
+                android:dividerHeight="0dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tvVergetable"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="@dimen/S2"
+                    android:background="@color/green_color"
+                    android:layout_height="@dimen/auth_etHeight"
+                    android:text="Damh Sach Rau"/>
+            <View android:layout_width="match_parent" android:layout_height="2dp"
+                  android:background="@color/line1"/>
+
+            <TextView
+                    android:id="@+id/tvMeat"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="@dimen/S2"
+                    android:layout_height="@dimen/auth_etHeight"
+                    android:text="Danh Sach Thit"/>
+            <View android:layout_width="match_parent" android:layout_height="2dp"
+                  android:background="@color/line1"/>
+
+            <TextView
+                    android:id="@+id/tvMenu"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="@dimen/S2"
+                    android:layout_height="@dimen/auth_etHeight"
+                    android:text="Cach Che Bien"/>
+            <View android:layout_width="match_parent" android:layout_height="2dp"
+                  android:background="@color/line1"/>
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+
 </RelativeLayout>
 

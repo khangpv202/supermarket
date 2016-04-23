@@ -3,7 +3,6 @@ package locator.khpv.com.supermarket.vegetable.control;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -21,7 +20,6 @@ import locator.khpv.com.supermarket.vegetable.model.Vegetable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by Administrator on 4/20/2016.
@@ -37,25 +35,26 @@ public class VegetableAddNewActivity extends Activity
     TextView tvChooseMenu;
     @Bind(R.id.etCalo)
     EditText etCalo;
-    @Bind(R.id.tvFinish)
+    @Bind(R.id.btFinish)
     TextView tvFinish;
-    @Bind(R.id.tvCancel)
+    @Bind(R.id.btCancel)
     TextView tvCancel;
     @Bind(R.id.llNameOfMenuList)
     LinearLayout llNameOfMenuList;
 
     Map<String, String> data;
     List<String> checkedMenu;
+    String displayMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vegetable_add_new_activity);
-
         myFirebaseRef = new Firebase("https://giaptuyenk.firebaseio.com");
         ButterKnife.bind(this);
         data = new LinkedTreeMap<>();
+        displayMenu = "";
         myFirebaseRef.child("menuList").addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -93,6 +92,7 @@ public class VegetableAddNewActivity extends Activity
                             View childView = View.inflate(VegetableAddNewActivity.this, R.layout.add_vegetable_menu_item, null);
                             TextView nameItem = (TextView) childView.findViewById(R.id.tvNameItem);
                             nameItem.setText(text[i]);
+                            displayMenu = displayMenu + text[i] + ",";
                             llNameOfMenuList.addView(childView);
                             checkedMenu.add(data.get(text[i]));
                         }
@@ -112,7 +112,7 @@ public class VegetableAddNewActivity extends Activity
                 .show();
     }
 
-    @OnClick(R.id.tvFinish)
+    @OnClick(R.id.btFinish)
     void onclickFinish()
     {
         Firebase child = myFirebaseRef.child("vegetableList").push();
@@ -120,8 +120,8 @@ public class VegetableAddNewActivity extends Activity
         vegetable.setCost(etPrice.getText().toString());
         vegetable.setDisplayName(etNameOfVegetable.getText().toString());
         vegetable.setCalo(etCalo.getText().toString());
+        vegetable.setDisplayMenu(displayMenu);
         child.setValue(vegetable);
-        String key = child.getKey();
         Firebase menu = child.child("menu");
         for (String keyMenu : checkedMenu)
         {
@@ -130,7 +130,7 @@ public class VegetableAddNewActivity extends Activity
         finish();
     }
 
-    @OnClick(R.id.tvCancel)
+    @OnClick(R.id.btCancel)
     void clickCancel()
     {
         finish();

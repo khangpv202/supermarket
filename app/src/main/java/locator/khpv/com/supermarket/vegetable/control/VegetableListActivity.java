@@ -100,23 +100,8 @@ public class VegetableListActivity extends Activity
 
                         }
                     });
-
-
                 }
-                myFirebaseRef.child("/vegetableList/" + lastKey + "/menu").addListenerForSingleValueEvent(new ValueEventListener()
-                {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot)
-                    {
-                        Log.e("deo hieu", "done");
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError)
-                    {
-
-                    }
-                });
+                setDataToView();
             }
 
             @Override
