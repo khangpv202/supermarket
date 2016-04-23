@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/margin_text"
-            android:textColor="@color/gray_1"
+            android:textColor="@color/black"
             android:text="rau cai cuc" />
     </LinearLayout>
 
@@ -40,10 +40,12 @@
 
         <TextView
             android:id="@+id/tvPrice"
+            style="@style/T29"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/margin_text"
-            android:textColor="@color/gray_1"
+            android:textColor="@color/black"
             android:text="5000d" />
     </LinearLayout>
 

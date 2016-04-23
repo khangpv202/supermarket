@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<include-->
+        <!--android:id="@+id/groupInfo"-->
+        <!--layout="@layout/billing_group_header" />-->
+
+    <LinearLayout
+        android:id="@+id/wholeContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llAddNewInfoVendor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_etHeight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin_size"
+                android:text="#Vendor#" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":" />
+
+            <TextView
+                android:id="@+id/etAddNewInfoVendor"
+                style="@style/T15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:drawableRight="@drawable/icon_arrow_collapse_drawer"
+                android:inputType="textMultiLine"
+                android:paddingRight="5dp"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/G1"
+            android:background="@color/border_login" />
+
+        <LinearLayout
+            android:id="@+id/llAddNewInfoBillName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_etHeight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin_size"
+                android:text="#Bill##" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":" />
+
+            <EditText
+                android:id="@+id/etAddNewInfoBillName"
+                style="@style/T15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:inputType="textMultiLine"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/G1"
+            android:background="@color/border_login" />
+
+        <LinearLayout
+            android:id="@+id/llAddNewInfoDate"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_etHeight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin_size"
+                android:text="date" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":" />
+
+            <EditText
+                android:id="@+id/etAddNewInfoDate"
+                style="@style/T15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:drawableRight="@drawable/icon_calendar"
+                android:focusableInTouchMode="false"
+                android:inputType="textCapSentences"
+                android:paddingRight="5dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/G1"
+            android:background="@color/border_login" />
+
+        <LinearLayout
+            android:id="@+id/llAddNewInfoPaymentType"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_etHeight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin_size"
+                android:text="Payment type" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":" />
+
+            <TextView
+                android:id="@+id/etAddNewInfoPaymentType"
+                style="@style/T15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:drawableRight="@drawable/icon_arrow_collapse_drawer"
+                android:paddingRight="5dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/G1"
+            android:background="@color/border_login" />
+
+        <LinearLayout
+            android:id="@+id/llAddNewInfoTerms"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_etHeight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/T4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin_size"
+                android:text="string/invoice.terms" />
+
+            <EditText
+                android:id="@+id/etAddNewInfoTerm"
+                style="@style/T15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/G1"
+            android:background="@color/border_login" />
+    </LinearLayout>
+</LinearLayout>
