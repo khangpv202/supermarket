@@ -2,9 +2,14 @@ package locator.khpv.com.supermarket.vegetable.control;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.Bind;
@@ -12,8 +17,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.firebase.client.*;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.FileList;
 import com.google.gson.internal.LinkedTreeMap;
 import locator.khpv.com.supermarket.R;
+import locator.khpv.com.supermarket.common.MyBaseActivity;
 import locator.khpv.com.supermarket.vegetable.model.Menu;
 import locator.khpv.com.supermarket.vegetable.model.Vegetable;
 
@@ -24,7 +36,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 4/20/2016.
  */
-public class VegetableAddNewActivity extends Activity
+public class VegetableAddNewActivity extends MyBaseActivity
 {
     Firebase myFirebaseRef;
     @Bind(R.id.etNameOfVegetable)
@@ -41,16 +53,23 @@ public class VegetableAddNewActivity extends Activity
     TextView tvCancel;
     @Bind(R.id.llNameOfMenuList)
     LinearLayout llNameOfMenuList;
+    @Bind(R.id.tvAddImage)
+    TextView tvAddImage;
+    @Bind(R.id.ivAvatar)
+    ImageView ivAvatar;
 
     Map<String, String> data;
     List<String> checkedMenu;
     String displayMenu;
+    String mainImageId;
+    private static final String TAG = "VegetableDetailActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vegetable_add_new_activity);
+        mainImageId = "0B8ZkS3FTNs2fc0daZjVXNHhBUFE";
         myFirebaseRef = new Firebase("https://giaptuyenk.firebaseio.com");
         ButterKnife.bind(this);
         data = new LinkedTreeMap<>();
@@ -75,6 +94,13 @@ public class VegetableAddNewActivity extends Activity
         });
     }
 
+    @OnClick(R.id.tvAddImage)
+    void onClickAddAvatar()
+    {
+        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
+                REQUEST_CODE_CAPTURE_IMAGE);
+    }
+
     @OnClick(R.id.tvChooseMenu)
     void clickChooseMenu()
     {
@@ -86,7 +112,7 @@ public class VegetableAddNewActivity extends Activity
                     @Override
                     public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text)
                     {
-                        checkedMenu = new ArrayList<String>();
+                        checkedMenu = new ArrayList<>();
                         for (int i = 0; i < which.length; i++)
                         {
                             View childView = View.inflate(VegetableAddNewActivity.this, R.layout.add_vegetable_menu_item, null);
@@ -120,6 +146,7 @@ public class VegetableAddNewActivity extends Activity
         vegetable.setCost(etPrice.getText().toString());
         vegetable.setDisplayName(etNameOfVegetable.getText().toString());
         vegetable.setCalo(etCalo.getText().toString());
+        vegetable.setMainImageID(mainImageId);
         vegetable.setDisplayMenu(displayMenu);
         child.setValue(vegetable);
         Firebase menu = child.child("menu");

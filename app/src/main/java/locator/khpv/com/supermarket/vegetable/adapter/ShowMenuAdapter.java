@@ -1,6 +1,8 @@
 package locator.khpv.com.supermarket.vegetable.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -19,7 +21,6 @@ import locator.khpv.com.supermarket.vegetable.model.Vegetable;
  */
 public class ShowMenuAdapter extends ArrayAdapter<Vegetable>
 {
-
     public ShowMenuAdapter(Context context, int resource, List<Vegetable> objects)
     {
         super(context, resource, objects);
@@ -36,7 +37,7 @@ public class ShowMenuAdapter extends ArrayAdapter<Vegetable>
             viewHolder.tvCost = (TextView) convertView.findViewById(R.id.tvCost);
             viewHolder.tvNameOfMenu = (TextView) convertView.findViewById(R.id.tvNameOfMenu);
             viewHolder.tvNameOfVegetable = (TextView) convertView.findViewById(R.id.tvNameOfVegetable);
-            viewHolder.ivAvatar = (ImageView) convertView.findViewById(R.id.ivAvatar);
+            viewHolder.fbAvatar = (SimpleDraweeView) convertView.findViewById(R.id.fbAvatar);
             convertView.setTag(viewHolder);
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
@@ -47,6 +48,10 @@ public class ShowMenuAdapter extends ArrayAdapter<Vegetable>
         setMenuView(viewHolder, vegetable);
         viewHolder.tvNameOfVegetable.setText(vegetable.getDisplayName());
         viewHolder.tvNameOfMenu.setText(vegetable.getDisplayMenu());
+        Uri imageUri = Uri.parse("https://drive.google.com/thumbnail?authuser=0&sz=w150&id=" + vegetable.getMainImageID());
+//        Uri imageUri = Uri.parse("https://drive.google.com/thumbnail?authuser=0&sz=w150&id=0B8ZkS3FTNs2fWkhrcWVDOTBXOU0");
+        Log.i("urlImage", imageUri.toString());
+        viewHolder.fbAvatar.setImageURI(imageUri);
         setVisibleItem(viewHolder, vegetable);
 
         return convertView;
@@ -89,6 +94,6 @@ public class ShowMenuAdapter extends ArrayAdapter<Vegetable>
         TextView tvCalo;
         TextView tvNameOfMenu;
         TextView tvNameOfVegetable;
-        ImageView ivAvatar;
+        SimpleDraweeView fbAvatar;
     }
 }

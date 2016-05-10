@@ -16,6 +16,8 @@ import locator.khpv.com.supermarket.vegetable.adapter.ShowMenuAdapter;
 import locator.khpv.com.supermarket.vegetable.model.Menu;
 import locator.khpv.com.supermarket.vegetable.model.Vegetable;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +26,10 @@ import java.util.List;
  */
 public class VegetableListActivity extends Activity
 {
-
     Firebase myFirebaseRef;
     @Bind(R.id.lvContent)
     ListView lvContent;
     List<Vegetable> vegetableList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,53 +53,53 @@ public class VegetableListActivity extends Activity
                     //read menu list
                     final Vegetable vegetable = snapshot.getValue(Vegetable.class);
                     vegetableList.add(vegetable);
-                    //cach che bien mon an
-                    myFirebaseRef.child("/vegetableList/" + snapshot.getKey() + "/menu").addChildEventListener(new ChildEventListener()
-                    {
-                        @Override
-                        public void onChildAdded(DataSnapshot dataSnapshot, String s)
-                        {
-                            myFirebaseRef.child("/menuList/" + dataSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener()
-                            {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot)
-                                {
-                                    //read data of display name of menu for user.
-                                    Log.e("hehe,final data: ", "" + dataSnapshot.getValue(Menu.class));
-                                    vegetable.getMenu().add(dataSnapshot.getValue(Menu.class));
-                                }
-
-                                @Override
-                                public void onCancelled(FirebaseError firebaseError)
-                                {
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s)
-                        {
-
-                        }
-
-                        @Override
-                        public void onChildRemoved(DataSnapshot dataSnapshot)
-                        {
-
-                        }
-
-                        @Override
-                        public void onChildMoved(DataSnapshot dataSnapshot, String s)
-                        {
-
-                        }
-
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError)
-                        {
-
-                        }
-                    });
+//                    //cach che bien mon an
+//                    myFirebaseRef.child("/vegetableList/" + snapshot.getKey() + "/menu").addChildEventListener(new ChildEventListener()
+//                    {
+//                        @Override
+//                        public void onChildAdded(DataSnapshot dataSnapshot, String s)
+//                        {
+//                            myFirebaseRef.child("/menuList/" + dataSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener()
+//                            {
+//                                @Override
+//                                public void onDataChange(DataSnapshot dataSnapshot)
+//                                {
+//                                    //read data of display name of menu for user.
+//                                    Log.e("hehe,final data: ", "" + dataSnapshot.getValue(Menu.class));
+//                                    vegetable.getMenu().add(dataSnapshot.getValue(Menu.class));
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(FirebaseError firebaseError)
+//                                {
+//                                }
+//                            });
+//                        }
+//
+//                        @Override
+//                        public void onChildChanged(DataSnapshot dataSnapshot, String s)
+//                        {
+//
+//                        }
+//
+//                        @Override
+//                        public void onChildRemoved(DataSnapshot dataSnapshot)
+//                        {
+//
+//                        }
+//
+//                        @Override
+//                        public void onChildMoved(DataSnapshot dataSnapshot, String s)
+//                        {
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(FirebaseError firebaseError)
+//                        {
+//
+//                        }
+//                    });
                 }
                 setDataToView();
             }
