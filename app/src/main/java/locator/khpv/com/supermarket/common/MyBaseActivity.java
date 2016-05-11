@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -35,19 +37,20 @@ import java.util.UUID;
 /**
  * Created by Administrator on 5/8/2016.
  */
-public class MyBaseActivity extends Activity implements GoogleApiClient.ConnectionCallbacks,
+public abstract class MyBaseActivity extends Activity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
 {
     private static final String TAG = "MyBaseActivity";
     GoogleApiClient mGoogleApiClient;
     public GoogleAccountCredential mCredential;
     public Bitmap mBitmapToSave;
-    public String fileID;
+    public String mainImageId;
+    private String mainImageSharedID;
     public static final int REQUEST_CODE_CAPTURE_IMAGE = 1;
     public static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
     public static final String[] SCOPES = {DriveScopes.DRIVE_METADATA_READONLY};
-
+    Uri imageUri;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -69,7 +72,10 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
             mCredential.setSelectedAccountName(accountName);
             return;
         }
-        saveFileToDrive();
+        if (mBitmapToSave != null)
+        {
+            saveFileToDrive();
+        }
     }
 
     @Override
@@ -132,9 +138,8 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
                         {
                             Log.i(TAG, "Unable to write file contents.");
                         }
-                        fileID = UUID.randomUUID().toString();
                         MetadataChangeSet metadataChangeSet = new MetadataChangeSet.Builder()
-                                .setMimeType("image/jpeg").setTitle(fileID).build();
+                                .setMimeType("image/jpeg").setTitle(mainImageId).build();
                         // Create an intent for the file chooser, and start it.
                         IntentSender intentSender = Drive.DriveApi
                                 .newCreateFileActivityBuilder()
@@ -168,7 +173,7 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
                     Log.e("onActivityResult", "RgsgeEQUEST_CODE_CAPTURE_IMAGE");
                     // Store the image data as a bitmap for writing later.
                     mBitmapToSave = (Bitmap) data.getExtras().get("data");
-//                    saveFileToDrive();
+                    getImageView().setImageBitmap(mBitmapToSave);
                 }
                 break;
             case REQUEST_CODE_CREATOR:
@@ -178,7 +183,7 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
                 {
                     try
                     {
-                        Thread.sleep(1000);
+                        Thread.sleep(3000);
                     }
                     catch (InterruptedException e)
                     {
@@ -205,7 +210,7 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
                             try
                             {
                                 result = mService.files().list()
-                                        .setQ("name ='" + fileID + "'")
+                                        .setQ("name ='" + mainImageId + "'")
                                         .execute();
                             }
                             catch (Exception e)
@@ -219,6 +224,7 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
                                 Log.e("deo hieu 4", "hic hic" + files.size() + " id: ");
                                 for (final File file : files)
                                 {
+                                    mainImageSharedID = file.getId();
                                     Log.e("-----------" + file.getName(), file.getId() + "");
                                 }
                             }
@@ -229,6 +235,8 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
         }
     }
 
+    public abstract ImageView getImageView();
+
     @Override
     protected void onPause()
     {
@@ -238,6 +246,7 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
         }
         super.onPause();
     }
+
     @Override
     protected void onResume()
     {
@@ -254,5 +263,10 @@ public class MyBaseActivity extends Activity implements GoogleApiClient.Connecti
         }
         // Connect the client. Once connected, the camera is launched.
         mGoogleApiClient.connect();
+    }
+
+    public String getMainImageSharedID()
+    {
+        return mainImageSharedID;
     }
 }

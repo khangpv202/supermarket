@@ -53,15 +53,14 @@ public class VegetableAddNewActivity extends MyBaseActivity
     TextView tvCancel;
     @Bind(R.id.llNameOfMenuList)
     LinearLayout llNameOfMenuList;
-    @Bind(R.id.tvAddImage)
-    TextView tvAddImage;
+    @Bind(R.id.ivTakePhoto)
+    ImageView ivTakePhoto;
     @Bind(R.id.ivAvatar)
     ImageView ivAvatar;
 
     Map<String, String> data;
     List<String> checkedMenu;
     String displayMenu;
-    String mainImageId;
     private static final String TAG = "VegetableDetailActivity";
 
     @Override
@@ -69,7 +68,6 @@ public class VegetableAddNewActivity extends MyBaseActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vegetable_add_new_activity);
-        mainImageId = "0B8ZkS3FTNs2fc0daZjVXNHhBUFE";
         myFirebaseRef = new Firebase("https://giaptuyenk.firebaseio.com");
         ButterKnife.bind(this);
         data = new LinkedTreeMap<>();
@@ -94,7 +92,7 @@ public class VegetableAddNewActivity extends MyBaseActivity
         });
     }
 
-    @OnClick(R.id.tvAddImage)
+    @OnClick(R.id.ivTakePhoto)
     void onClickAddAvatar()
     {
         startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
@@ -146,7 +144,7 @@ public class VegetableAddNewActivity extends MyBaseActivity
         vegetable.setCost(etPrice.getText().toString());
         vegetable.setDisplayName(etNameOfVegetable.getText().toString());
         vegetable.setCalo(etCalo.getText().toString());
-        vegetable.setMainImageID(mainImageId);
+        vegetable.setMainImageID(getMainImageSharedID());
         vegetable.setDisplayMenu(displayMenu);
         child.setValue(vegetable);
         Firebase menu = child.child("menu");
@@ -161,5 +159,11 @@ public class VegetableAddNewActivity extends MyBaseActivity
     void clickCancel()
     {
         finish();
+    }
+
+    @Override
+    public ImageView getImageView()
+    {
+        return ivAvatar;
     }
 }
