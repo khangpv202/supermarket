@@ -1,9 +1,11 @@
 package locator.khpv.com.supermarket.vegetable.control;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -32,6 +34,7 @@ import locator.khpv.com.supermarket.vegetable.model.Vegetable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 4/20/2016.
@@ -95,7 +98,17 @@ public class VegetableAddNewActivity extends MyBaseActivity
     @OnClick(R.id.ivTakePhoto)
     void onClickAddAvatar()
     {
-        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
+
+        ContentValues values = new ContentValues();
+        mainImageId = UUID.randomUUID().toString();
+        values.put(MediaStore.Images.Media.TITLE, mainImageId);
+
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Image capture by camera");
+        imageUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent,
                 REQUEST_CODE_CAPTURE_IMAGE);
     }
 

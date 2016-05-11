@@ -1,11 +1,16 @@
 package locator.khpv.com.supermarket.common;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 import com.google.android.gms.common.ConnectionResult;
@@ -28,6 +33,7 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
@@ -50,7 +56,8 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
     public static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
     public static final String[] SCOPES = {DriveScopes.DRIVE_METADATA_READONLY};
-    Uri imageUri;
+   public Uri imageUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -129,7 +136,7 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                         OutputStream outputStream = driveContents.getOutputStream();
                         // Write the bitmap data from it.
                         ByteArrayOutputStream bitmapStream = new ByteArrayOutputStream();
-                        image.compress(Bitmap.CompressFormat.PNG, 100, bitmapStream);
+                        image.compress(Bitmap.CompressFormat.JPEG, 20, bitmapStream);
                         try
                         {
                             outputStream.write(bitmapStream.toByteArray());
@@ -171,9 +178,24 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                 if (resultCode == Activity.RESULT_OK)
                 {
                     Log.e("onActivityResult", "RgsgeEQUEST_CODE_CAPTURE_IMAGE");
+
+                    String imageId = convertImageUriToFile(imageUri, MyBaseActivity.this);
+                    Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + imageId);
+                    try
+                    {
+                        mBitmapToSave = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        e.printStackTrace();
+                    }
+//                    new LoadImagesFromSDCard().execute("" + imageId);
                     // Store the image data as a bitmap for writing later.
-                    mBitmapToSave = (Bitmap) data.getExtras().get("data");
-                    getImageView().setImageBitmap(mBitmapToSave);
+//                    mBitmapToSave = (Bitmap) data.getExtras().get("data");
+                    if (mBitmapToSave != null)
+                    {
+                        getImageView().setImageBitmap(mBitmapToSave);
+                    }
                 }
                 break;
             case REQUEST_CODE_CREATOR:
@@ -233,6 +255,181 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                 }
                 break;
         }
+    }
+
+    public static String convertImageUriToFile(Uri imageUri, Activity activity)
+    {
+
+        Cursor cursor = null;
+        int imageID = 0;
+
+        try
+        {
+
+            /*********** Which columns values want to get *******/
+            String[] proj = {
+                    MediaStore.Images.Media.DATA,
+                    MediaStore.Images.Media._ID,
+                    MediaStore.Images.Thumbnails._ID,
+                    MediaStore.Images.ImageColumns.ORIENTATION
+            };
+
+            cursor = activity.managedQuery(
+
+                    imageUri,         //  Get data for specific image URI
+                    proj,             //  Which columns to return
+                    null,             //  WHERE clause; which rows to return (all rows)
+                    null,             //  WHERE clause selection arguments (none)
+                    null              //  Order-by clause (ascending by name)
+
+            );
+
+            //  Get Query Data
+
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
+            int columnIndexThumb = cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID);
+            int file_ColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+            //int orientation_ColumnIndex = cursor.
+            //    getColumnIndexOrThrow(MediaStore.Images.ImageColumns.ORIENTATION);
+
+            int size = cursor.getCount();
+
+            /*******  If size is 0, there are no images on the SD Card. *****/
+
+            if (size == 0)
+            {
+
+
+//                imageDetails.setText("No Image");
+            }
+            else
+            {
+
+                int thumbID = 0;
+                if (cursor.moveToFirst())
+                {
+
+                    /**************** Captured image details ************/
+
+                    /*****  Used to show image on view in LoadImagesFromSDCard class ******/
+                    imageID = cursor.getInt(columnIndex);
+
+                    thumbID = cursor.getInt(columnIndexThumb);
+
+                    String Path = cursor.getString(file_ColumnIndex);
+
+                    //String orientation =  cursor.getString(orientation_ColumnIndex);
+
+                    String CapturedImageDetails = " CapturedImageDetails : \n\n"
+                            + " ImageID :" + imageID + "\n"
+                            + " ThumbID :" + thumbID + "\n"
+                            + " Path :" + Path + "\n";
+
+                    // Show Captured Image detail on activity
+//                    imageDetails.setText( CapturedImageDetails );
+
+                }
+            }
+        }
+        finally
+        {
+            if (cursor != null)
+            {
+                cursor.close();
+            }
+        }
+
+        // Return Captured Image ImageID ( By this ImageID Image will load from sdcard )
+
+        return "" + imageID;
+    }
+
+    public class LoadImagesFromSDCard extends AsyncTask<String, Void, Void>
+    {
+
+        private ProgressDialog Dialog = new ProgressDialog(MyBaseActivity.this);
+
+        Bitmap mBitmap;
+
+        protected void onPreExecute()
+        {
+            /****** NOTE: You can call UI Element here. *****/
+
+            // Progress Dialog
+            Dialog.setMessage(" Loading image from Sdcard..");
+            Dialog.show();
+        }
+
+
+        // Call after onPreExecute method
+        protected Void doInBackground(String... urls)
+        {
+
+            Bitmap bitmap = null;
+            Bitmap newBitmap = null;
+            Uri uri = null;
+
+
+            try
+            {
+
+                /**  Uri.withAppendedPath Method Description
+                 * Parameters
+                 *    baseUri  Uri to append path segment to
+                 *    pathSegment  encoded path segment to append
+                 * Returns
+                 *    a new Uri based on baseUri with the given segment appended to the path
+                 */
+
+                uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + urls[0]);
+
+                /**************  Decode an input stream into a bitmap. *********/
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+
+                if (bitmap != null)
+                {
+
+                    /********* Creates a new bitmap, scaled from an existing bitmap. ***********/
+
+                    newBitmap = Bitmap.createScaledBitmap(bitmap, 170, 170, true);
+
+                    bitmap.recycle();
+
+                    if (newBitmap != null)
+                    {
+
+                        mBitmap = newBitmap;
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                // Error fetching image, try to recover
+
+                /********* Cancel execution of this task. **********/
+                cancel(true);
+            }
+
+            return null;
+        }
+
+
+        protected void onPostExecute(Void unused)
+        {
+
+            // NOTE: You can call UI Element here.
+
+            // Close progress dialog
+            Dialog.dismiss();
+
+            if (mBitmap != null)
+            {
+                // Set Image to ImageView
+            }
+
+        }
+
     }
 
     public abstract ImageView getImageView();
