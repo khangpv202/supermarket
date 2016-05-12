@@ -102,7 +102,6 @@ public class VegetableAddNewActivity extends MyBaseActivity
         ContentValues values = new ContentValues();
         mainImageId = UUID.randomUUID().toString();
         values.put(MediaStore.Images.Media.TITLE, mainImageId);
-
         values.put(MediaStore.Images.Media.DESCRIPTION, "Image capture by camera");
         imageUri = getContentResolver().insert(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);

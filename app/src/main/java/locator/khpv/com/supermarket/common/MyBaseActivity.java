@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
+import locator.khpv.com.supermarket.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -56,7 +58,7 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
     public static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
     public static final String[] SCOPES = {DriveScopes.DRIVE_METADATA_READONLY};
-   public Uri imageUri;
+    public Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -181,21 +183,30 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
 
                     String imageId = convertImageUriToFile(imageUri, MyBaseActivity.this);
                     Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + imageId);
-                    try
-                    {
-                        mBitmapToSave = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        e.printStackTrace();
-                    }
-//                    new LoadImagesFromSDCard().execute("" + imageId);
-                    // Store the image data as a bitmap for writing later.
-//                    mBitmapToSave = (Bitmap) data.getExtras().get("data");
-                    if (mBitmapToSave != null)
+//                    try
+//                    {
+                        try
+                        {
+                            mBitmapToSave=    MediaStore.Images.Media
+                                    .getBitmap(getContentResolver(), uri);
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+//                        BitmapFactory.Options options = new BitmapFactory.Options();
+//                        options.inPreferredConfig = Bitmap.Config.RGB_565;
+//                        mBitmapToSave = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, options);
+//                    }
+//                    catch (FileNotFoundException e)
+//                    {
+//                        e.printStackTrace();
+//                    }
+                    if (getImageView() != null )
                     {
                         getImageView().setImageBitmap(mBitmapToSave);
                     }
+
                 }
                 break;
             case REQUEST_CODE_CREATOR:
@@ -203,14 +214,6 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                 Log.e("log 1-----------", "REQUEST_CODE_CREATOR----------------------");
                 if (resultCode == RESULT_OK)
                 {
-                    try
-                    {
-                        Thread.sleep(3000);
-                    }
-                    catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
                     Log.e(TAG, "Image successfully saved.");
                     mBitmapToSave = null;
                     Log.e("deo hieu 1", "hic hic");
@@ -219,7 +222,6 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                         @Override
                         public void run()
                         {
-
                             Log.e("deo hieu 2", "hic hic");
                             HttpTransport transport = AndroidHttp.newCompatibleTransport();
                             JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
@@ -229,18 +231,23 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                                     .build();
 
                             FileList result = null;
+                            List<File> files = null;
                             try
                             {
-                                result = mService.files().list()
-                                        .setQ("name ='" + mainImageId + "'")
-                                        .execute();
+                                do
+                                {
+                                    result = mService.files().list()
+                                            .setQ("name ='" + mainImageId + "'")
+                                            .execute();
+                                    files = result.getFiles();
+                                } while (files.size() == 0);
                             }
                             catch (Exception e)
                             {
                                 e.printStackTrace();
                             }
                             Log.e("deo hieu 3", "hic hic");
-                            List<File> files = result.getFiles();
+
                             if (files != null)
                             {
                                 Log.e("deo hieu 4", "hic hic" + files.size() + " id: ");
@@ -343,93 +350,6 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
         // Return Captured Image ImageID ( By this ImageID Image will load from sdcard )
 
         return "" + imageID;
-    }
-
-    public class LoadImagesFromSDCard extends AsyncTask<String, Void, Void>
-    {
-
-        private ProgressDialog Dialog = new ProgressDialog(MyBaseActivity.this);
-
-        Bitmap mBitmap;
-
-        protected void onPreExecute()
-        {
-            /****** NOTE: You can call UI Element here. *****/
-
-            // Progress Dialog
-            Dialog.setMessage(" Loading image from Sdcard..");
-            Dialog.show();
-        }
-
-
-        // Call after onPreExecute method
-        protected Void doInBackground(String... urls)
-        {
-
-            Bitmap bitmap = null;
-            Bitmap newBitmap = null;
-            Uri uri = null;
-
-
-            try
-            {
-
-                /**  Uri.withAppendedPath Method Description
-                 * Parameters
-                 *    baseUri  Uri to append path segment to
-                 *    pathSegment  encoded path segment to append
-                 * Returns
-                 *    a new Uri based on baseUri with the given segment appended to the path
-                 */
-
-                uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + urls[0]);
-
-                /**************  Decode an input stream into a bitmap. *********/
-                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-
-                if (bitmap != null)
-                {
-
-                    /********* Creates a new bitmap, scaled from an existing bitmap. ***********/
-
-                    newBitmap = Bitmap.createScaledBitmap(bitmap, 170, 170, true);
-
-                    bitmap.recycle();
-
-                    if (newBitmap != null)
-                    {
-
-                        mBitmap = newBitmap;
-                    }
-                }
-            }
-            catch (IOException e)
-            {
-                // Error fetching image, try to recover
-
-                /********* Cancel execution of this task. **********/
-                cancel(true);
-            }
-
-            return null;
-        }
-
-
-        protected void onPostExecute(Void unused)
-        {
-
-            // NOTE: You can call UI Element here.
-
-            // Close progress dialog
-            Dialog.dismiss();
-
-            if (mBitmap != null)
-            {
-                // Set Image to ImageView
-            }
-
-        }
-
     }
 
     public abstract ImageView getImageView();

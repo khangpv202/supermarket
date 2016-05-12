@@ -54,52 +54,52 @@ public class VegetableListActivity extends Activity
                     final Vegetable vegetable = snapshot.getValue(Vegetable.class);
                     vegetableList.add(vegetable);
 //                    //cach che bien mon an
-//                    myFirebaseRef.child("/vegetableList/" + snapshot.getKey() + "/menu").addChildEventListener(new ChildEventListener()
-//                    {
-//                        @Override
-//                        public void onChildAdded(DataSnapshot dataSnapshot, String s)
-//                        {
-//                            myFirebaseRef.child("/menuList/" + dataSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener()
-//                            {
-//                                @Override
-//                                public void onDataChange(DataSnapshot dataSnapshot)
-//                                {
-//                                    //read data of display name of menu for user.
-//                                    Log.e("hehe,final data: ", "" + dataSnapshot.getValue(Menu.class));
-//                                    vegetable.getMenu().add(dataSnapshot.getValue(Menu.class));
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(FirebaseError firebaseError)
-//                                {
-//                                }
-//                            });
-//                        }
-//
-//                        @Override
-//                        public void onChildChanged(DataSnapshot dataSnapshot, String s)
-//                        {
-//
-//                        }
-//
-//                        @Override
-//                        public void onChildRemoved(DataSnapshot dataSnapshot)
-//                        {
-//
-//                        }
-//
-//                        @Override
-//                        public void onChildMoved(DataSnapshot dataSnapshot, String s)
-//                        {
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(FirebaseError firebaseError)
-//                        {
-//
-//                        }
-//                    });
+                    myFirebaseRef.child("/vegetableList/" + snapshot.getKey() + "/menu").addChildEventListener(new ChildEventListener()
+                    {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                        {
+                            myFirebaseRef.child("/menuList/" + dataSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener()
+                            {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot)
+                                {
+                                    //read data of display name of menu for user.
+                                    Log.e("hehe,final data: ", "" + dataSnapshot.getValue(Menu.class));
+                                    vegetable.getMenu().add(dataSnapshot.getValue(Menu.class));
+                                }
+
+                                @Override
+                                public void onCancelled(FirebaseError firebaseError)
+                                {
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s)
+                        {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot)
+                        {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s)
+                        {
+
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError)
+                        {
+
+                        }
+                    });
                 }
                 setDataToView();
             }

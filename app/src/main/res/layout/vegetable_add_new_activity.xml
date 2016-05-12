@@ -12,13 +12,14 @@
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
                 <ImageView android:layout_width="150dp" android:layout_height="150dp"
                            android:id="@+id/ivAvatar"
+                           android:src="@drawable/take_photo"
                            android:layout_centerInParent="true"
                            android:background="@color/gray_1"/>
-<ImageView android:layout_width="50dp" android:layout_height="50dp"
-           android:layout_marginTop="10dp"
-           android:layout_marginLeft="10dp"
-           android:id="@+id/ivTakePhoto"
-        android:background="@drawable/take_photo"/>
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
+                           android:layout_marginTop="10dp"
+                           android:layout_marginLeft="10dp"
+                           android:id="@+id/ivTakePhoto"
+                           android:background="@drawable/take_photo"/>
             </RelativeLayout>
 
             <LinearLayout
