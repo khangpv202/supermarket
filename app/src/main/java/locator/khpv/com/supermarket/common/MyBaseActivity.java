@@ -25,6 +25,7 @@ import com.google.android.gms.drive.MetadataChangeSet;
 import com.google.android.gms.plus.Plus;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -65,22 +66,21 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
     {
         super.onCreate(savedInstanceState);
         // Connect the client. Once connected, the camera is launched.
-
-        mCredential = GoogleAccountCredential.usingOAuth2(
-                getApplicationContext(), Arrays.asList(SCOPES))
-                .setBackOff(new ExponentialBackOff());
     }
 
     @Override
     public void onConnected(Bundle bundle)
     {
-        if (mCredential.getSelectedAccountName() == null)
+        if (mCredential == null)
         {
             String accountName = Plus.AccountApi.getAccountName(mGoogleApiClient);
+            mCredential = GoogleAccountCredential.usingOAuth2(
+                    getApplicationContext(), Arrays.asList(SCOPES))
+                    .setSelectedAccountName(accountName)
+                    .setBackOff(new ExponentialBackOff());
             Log.i(this.getLocalClassName(), "API client connected." + accountName);
-            mCredential.setSelectedAccountName(accountName);
-            return;
         }
+
         if (mBitmapToSave != null)
         {
             saveFileToDrive();
@@ -185,15 +185,15 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                     Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + imageId);
 //                    try
 //                    {
-                        try
-                        {
-                            mBitmapToSave=    MediaStore.Images.Media
-                                    .getBitmap(getContentResolver(), uri);
-                        }
-                        catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
+                    try
+                    {
+                        mBitmapToSave = MediaStore.Images.Media
+                                .getBitmap(getContentResolver(), uri);
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
 //                        BitmapFactory.Options options = new BitmapFactory.Options();
 //                        options.inPreferredConfig = Bitmap.Config.RGB_565;
 //                        mBitmapToSave = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, options);
@@ -202,7 +202,7 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
 //                    {
 //                        e.printStackTrace();
 //                    }
-                    if (getImageView() != null )
+                    if (getImageView() != null)
                     {
                         getImageView().setImageBitmap(mBitmapToSave);
                     }
@@ -242,8 +242,14 @@ public abstract class MyBaseActivity extends Activity implements GoogleApiClient
                                     files = result.getFiles();
                                 } while (files.size() == 0);
                             }
-                            catch (Exception e)
+                            catch (UserRecoverableAuthIOException e)
                             {
+                                Log.e("deo hieu dsfdf3333333", "hic hic" + e.getMessage());
+                                e.printStackTrace();
+                            }
+                            catch (IOException e)
+                            {
+                                Log.e("haha, lai error", "message: " + e.getMessage());
                                 e.printStackTrace();
                             }
                             Log.e("deo hieu 3", "hic hic");
